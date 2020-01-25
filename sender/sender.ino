@@ -2,12 +2,20 @@
 
 #include <SPI.h>
 #include <RH_NRF24.h>
+#include <dht.h>
 
 // Singleton instance of the radio driver
 RH_NRF24 nrf24;
-// RH_NRF24 nrf24(8, 7); // use this to be electrically compatible with Mirf
-// RH_NRF24 nrf24(8, 10);// For Leonardo, need explicit SS pin
-// RH_NRF24 nrf24(8, 7); // For RFM73 on Anarduino Mini
+dht DHT;
+#define DHT22_PIN 2
+
+
+struct DATA{
+int id;
+float temp;
+float hum;
+};
+DATA sensor;
 
 void setup() 
 {
@@ -26,16 +34,22 @@ void setup()
 
 void loop()
 {
+  int chk = DHT.read22(DHT22_PIN);
+  sensor.id = 1;
+  sensor.temp = DHT.temperature;
+  sensor.hum = DHT.humidity;
+  Serial.println(sensor.temp);
+  Serial.println(sensor.hum);
+  //nrf24.send((uint8_t*)&sensor, sizeof(sensor));
+  //nrf24.waitPacketSent();
   Serial.println("Sending to nrf24_server");
   // Send a message to nrf24_server
-  uint8_t tData[] = "T:100";
-  uint8_t hData[] = "H:50";
-  nrf24.send(tData, sizeof(tData));
-  
-  
+  //uint8_t data[] = "Hello World!";
+  nrf24.send((uint8_t*)&sensor, sizeof(sensor));
   nrf24.waitPacketSent();
-  nrf24.send(hData, sizeof(hData));
-  nrf24.waitPacketSent();
+  
+  //nrf24.send(data, sizeof(data));
+  //nrf24.waitPacketSent();
   // Now wait for a reply
   uint8_t buf[RH_NRF24_MAX_MESSAGE_LEN];
   uint8_t len = sizeof(buf);
@@ -57,5 +71,5 @@ void loop()
   {
     Serial.println("No reply, is nrf24_server running?");
   }
-  delay(400);
+  delay(5000);
 }

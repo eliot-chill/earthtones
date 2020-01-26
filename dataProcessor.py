@@ -1,5 +1,13 @@
 import db
 
+def getArduinosForMarkers():
+    earthtonesDB = db.dbConn()
+    activeArduinosCollection= earthtonesDB.activeArduinos
+    arduinoList = []
+    for arduino in activeArduinosCollection.find({},{ "_id": 0}):
+        arduinoList.append(arduino)
+    return arduinoList
+
 def parseUploadData(data):
     earthtonesDB = db.dbConn()
     sensorDataCollection = earthtonesDB.sensorData
@@ -16,10 +24,4 @@ def parseUploadData(data):
 
 
 if __name__ == "__main__":
-    dataObj = {
-            "id":"arduino2",
-            "temperature":"25",
-            "humidity":"5",
-            "timestamp":"now"
-        }
-    parseUploadData(dataObj)
+    print(getArduinosForMarkers())

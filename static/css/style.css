@@ -1,0 +1,27 @@
+#earthtones-title {
+  font-size: 64px;
+  letter-spacing: 3px;
+  font-family: 'Alegreya Sans SC', sans-serif;
+  color: gainsboro;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+#map {
+    height: 75%;
+    width: 75%;
+  }
+#map-container {
+  flex-direction: column;
+  height: inherit;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    background-color: #474747;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }

@@ -35,7 +35,7 @@ void setup()
 void loop()
 {
   int chk = DHT.read22(DHT22_PIN);
-  sensor.id = 1;
+  sensor.id = 2;
   sensor.temp = DHT.temperature;
   sensor.hum = DHT.humidity;
   Serial.println(sensor.temp);

@@ -11,6 +11,11 @@ def loadConfig():
 def getPassword():
     return loadConfig()["dbPass"]
 
+def getAuthToken():
+    return loadConfig()["twilioAuth"]
+
+def getSSID():
+    return loadConfig()["twilioSSID"]
 
 if __name__ == "__main__":
     print(getPassword())

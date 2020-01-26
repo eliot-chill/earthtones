@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
-from dataProcessor import parseUploadData, getArduinosForMarkers
+from dataProcessor import parseUploadData, getArduinosForMarkers, uploadPhoneInfo
 import update_wind
+import re
 
 app = Flask(__name__)
 
@@ -23,6 +24,25 @@ def hello():
 @app.route("/update_wind")
 def update_wind():
     return update_wind.call()
+
+
+@app.route("/addPhone", methods=["POST"])
+def addPhoneToDB():
+    phoneNumber = request.get_json()['phoneNumber']
+    arduinoID = request.get_json()['arduinoID']
+    if(re.match("^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$",phoneNumber)):
+        return uploadPhoneInfo(phoneNumber,arduinoID)
+    else:
+        return "Not added - Format incorrect"
+    
+
+
+
+
+@app.route("/sendMessage", methods=["POST"])
+def sendAlert():
+    arduinoID = request.get_json()['arduinoID']
+    
 
 
 

@@ -28,5 +28,23 @@ def parseUploadData(data):
 	return "Done"
 
 
+def uploadPhoneInfo(phoneNumber,arduinoID):
+	earthtonesDB = db.dbConn()
+	phoneNumberInfoCollection = earthtonesDB.phoneNumberInfo
+	arduinoData = phoneNumberInfoCollection.find_one({"arduinoID":arduinoID})
+	if(phoneNumber not in arduinoData['numbers']):
+		arduinoData['numbers'].append(phoneNumber)
+	phoneNumberInfoCollection.update_one({'arduinoID':arduinoID},{"$set":arduinoData})
+	
+	return "Done"
+
+def removePhoneNumber(phoneNumber,arduinoID):
+	earthtonesDB = db.dbConn()
+	phoneNumberInfoCollection = earthtonesDB.phoneNumberInfo
+	arduinoData = phoneNumberInfoCollection.find_one({"arduinoID":arduinoID})
+	if(phoneNumber in arduinoData['numbers']):
+		arduinoData['numbers'].remove(phoneNumber)
+	phoneNumberInfoCollection.update_one({'arduinoID':arduinoID},{"$set":arduinoData})
+
 if __name__ == "__main__":
-	print(getArduinosForMarkers())
+	removePhoneNumber("+447496333676","arduino0")

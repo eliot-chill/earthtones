@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   
@@ -13,10 +14,7 @@
       <h1 id="earthtones-title">EARTHTONES</h1>
     <div id="map">
     <script>
-      // TODO
-      // Replace dummy JSON data below with values from DB somehow (probs through webportal.py).
       var arduino_json = {{ arduinoList|tojson }};
-
       var map;
       function initMap() {
 
@@ -270,16 +268,24 @@
             ]
         });
 
+        var heat_map_data = [];
         for(var i = 0; i < arduino_json.length; i++) {
             var ard_id = arduino_json[i]['id'];
             var lat_lng = new google.maps.LatLng(arduino_json[i]['lat'], arduino_json[i]['lng']);
             var marker = new google.maps.Marker({position: lat_lng, map: map});
+            heat_map_data.push({location:lat_lng, weight: arduino_json[i]["temp"]});
         }
 
+        var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heat_map_data,
+            radius: 60,
+            dissipating: true
+        });
+        heatmap.setMap(map);
 
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5X9ww7Fg0W4Wr9G0kpFZjtYQ4FsQJJ2s&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5X9ww7Fg0W4Wr9G0kpFZjtYQ4FsQJJ2s&callback=initMap&libraries=visualization"
     async defer></script>
     </div>
   </div>

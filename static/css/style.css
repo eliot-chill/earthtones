@@ -23,6 +23,29 @@
   font-size: 1.2em;
 }
 
+.notification-form {
+  width: 33vw;
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.notification-form input {
+  display: block;
+}
+.notification-form input[type=text]{
+  padding: 10px;
+  border-radius: 4px;
+  border: 0px;
+}
+.notification-form input[type=submit] {
+  background-color: #ff6565;
+  border: 0px;
+  border-radius: 4px;
+  padding: 10px 30px;
+  color: white;
+}
+
 #container {
   display: flex;
   height: 100%;
@@ -37,6 +60,8 @@
 .right {
   /*flex: 1;*/
   width: 33vw;
+  display: flex;
+  flex-direction: column;
 }
 
 #info-panel {

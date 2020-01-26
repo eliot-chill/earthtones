@@ -4,7 +4,23 @@
   font-family: 'Alegreya Sans SC', sans-serif;
   color: gainsboro;
   text-align: center;
+  margin: 0 20px 5px 20px;
+}
+#earthtones-subtitle {
+  font-size: 24px;
+  letter-spacing: 3px;
+  font-family: 'Alegreya Sans SC', sans-serif;
+  color: gainsboro;
+  text-align: center;
   margin: 0 20px 20px 20px;
+}
+
+
+#info {
+  text-align: center;
+  color:gainsboro;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.2em;
 }
 
 #container {
@@ -46,3 +62,10 @@
     margin: 0;
     padding: 0;
   }
+
+  hr {
+    border: 0;
+    height: 1px;
+   /* background: #333;*/
+    background-image: linear-gradient(to right, #474747, gainsboro, #474747);
+}

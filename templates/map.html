@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>EarthTones</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:300i,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
@@ -284,6 +286,10 @@
         heatmap.setMap(map);
 
       }
+
+      function updateInfoPanel(data){
+          $('#info-panel').text("TEST!");
+        }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5X9ww7Fg0W4Wr9G0kpFZjtYQ4FsQJJ2s&callback=initMap&libraries=visualization"
     async defer></script>
@@ -291,6 +297,9 @@
   </div>
   <div class="right" id="info-panel">
     <h1 id="earthtones-title">EARTHTONES</h1>
+    <h2 id="earthtones-subtitle"><i>Remote Crisis Monitoring</i></h2>
+    <hr>
+    <div id="info"><p>Click on a station to see local data</p></div>
   </div>
 </div>
   </body>

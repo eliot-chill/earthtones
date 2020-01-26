@@ -18,8 +18,10 @@
     <script>
       var arduino_json = {{ arduinoList|tojson }};
       var map;
+      function updateInfoPanel(data){
+          $('#info').text(data);
+        }
       function initMap() {
-
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -37.090335, lng: 149.370666},
             zoom: 10,
@@ -271,11 +273,23 @@
         });
 
         var heat_map_data = [];
+        var markers = [];
         for(var i = 0; i < arduino_json.length; i++) {
-            var ard_id = arduino_json[i]['id'];
+            var ard_id = arduino_json[i]['arduinoID'];
+            console.log(arduino_json);
             var lat_lng = new google.maps.LatLng(arduino_json[i]['lat'], arduino_json[i]['lng']);
-            var marker = new google.maps.Marker({position: lat_lng, map: map});
+            var marker = new google.maps.Marker({
+              position: lat_lng,
+              map: map,
+              temp: arduino_json[i]['temp'],
+              hum: arduino_json[i]['hum'],
+              id: arduino_json[i]['arduinoID']
+            });
+            marker.addListener('click', function() {
+              updateInfoPanel(this.id);
+            });
             heat_map_data.push({location:lat_lng, weight: arduino_json[i]["temp"]});
+
         }
 
         var heatmap = new google.maps.visualization.HeatmapLayer({
@@ -287,16 +301,14 @@
 
       }
 
-      function updateInfoPanel(data){
-          $('#info-panel').text("TEST!");
-        }
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5X9ww7Fg0W4Wr9G0kpFZjtYQ4FsQJJ2s&callback=initMap&libraries=visualization"
     async defer></script>
     </div>
   </div>
   <div class="right" id="info-panel">
-    <h1 id="earthtones-title">EARTHTONES</h1>
+    <h1 id="earthtones-title"><img style="width:100%" src="static/images/logo2.png" alt="Earthtones Logo"></h1>
     <h2 id="earthtones-subtitle"><i>Remote Crisis Monitoring</i></h2>
     <hr>
     <div id="info"><p>Click on a station to see local data</p></div>

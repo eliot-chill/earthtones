@@ -4,26 +4,18 @@
     <title>EarthTones</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
+  
   <body>
-    <div id="map"></div>
+    <div id="map-container">
+      <h1 id="earthtones-title">EARTHTONES</h1>
+    <div id="map">
     <script>
       // TODO
       // Replace dummy JSON data below with values from DB somehow (probs through webportal.py).
-      var arduino_json = [{"id": "kgr98315b", lat: -37.090335, lng: 149.370666},{"id": "hurbsi883", lat: -37.094532, lng: 149.379464}];
+      var arduino_json = {{ arduinoList|tojson }};
 
       var map;
       function initMap() {
@@ -289,5 +281,7 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5X9ww7Fg0W4Wr9G0kpFZjtYQ4FsQJJ2s&callback=initMap"
     async defer></script>
+    </div>
+  </div>
   </body>
 </html>

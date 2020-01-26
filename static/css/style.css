@@ -4,18 +4,39 @@
   font-family: 'Alegreya Sans SC', sans-serif;
   color: gainsboro;
   text-align: center;
-  margin: 0 0 20px 0;
+  margin: 0 20px 20px 20px;
 }
-#map {
-    height: 75%;
-    width: 75%;
-  }
-#map-container {
-  flex-direction: column;
-  height: inherit;
-  width: inherit;
+
+#container {
   display: flex;
-  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.left {
+  /*flex: 0 0 65%;*/
+  width: 66vw;
+}
+
+.right {
+  /*flex: 1;*/
+  width: 33vw;
+}
+
+#info-panel {
+  background-color: #474747;
+  justify-content: right;
+}
+
+#map {
+  height:inherit;
+  width:inherit;
+}
+#map-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: left;
   align-items: center;
 }
   /* Optional: Makes the sample page fill the window. */

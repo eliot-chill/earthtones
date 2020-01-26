@@ -17,13 +17,13 @@ def parseUploadData(data):
 	earthtonesDB = db.dbConn()
 	sensorDataCollection = earthtonesDB.sensorData
 	post = {
-		"arduinoID":data['id'],
+		"arduinoID":data['arduinoID'],
 		"temperature":data['temperature'],
 		"humidity":data['humidity'],
 		"timestamp":data['timestamp']
 	}
 
-	sensorDataCollection.update_one({'arduinoID':data['id']}, {"$set": post}, upsert=True)
+	sensorDataCollection.update_one({'arduinoID':data['arduinoID']}, {"$set": post}, upsert=True)
 
 	return "Done"
 
@@ -32,9 +32,14 @@ def uploadPhoneInfo(phoneNumber,arduinoID):
 	earthtonesDB = db.dbConn()
 	phoneNumberInfoCollection = earthtonesDB.phoneNumberInfo
 	arduinoData = phoneNumberInfoCollection.find_one({"arduinoID":arduinoID})
-	if(phoneNumber not in arduinoData['numbers']):
+	if(arduinoData is None):
+		arduinoData = {"arduinoID":arduinoID,"numbers":[phoneNumber]}
+		phoneNumberInfoCollection.update_one({'arduinoID':arduinoID},{"$set":arduinoData},upsert=True)
+		return "Done"
+		
+	if(arduinoData is not None and phoneNumber not in arduinoData['numbers']):
 		arduinoData['numbers'].append(phoneNumber)
-	phoneNumberInfoCollection.update_one({'arduinoID':arduinoID},{"$set":arduinoData})
+	phoneNumberInfoCollection.update_one({'arduinoID':arduinoID},{"$set":arduinoData}, upsert=True)
 	
 	return "Done"
 

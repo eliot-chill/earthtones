@@ -28,12 +28,10 @@ def update_wind():
 
 @app.route("/addPhone", methods=["POST"])
 def addPhoneToDB():
-    phoneNumber = request.get_json()['phoneNumber']
-    arduinoID = request.get_json()['arduinoID']
-    if(re.match("^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$",phoneNumber)):
-        return uploadPhoneInfo(phoneNumber,arduinoID)
-    else:
-        return "Not added - Format incorrect"
+    phoneNumber = request.args.get('id')
+    arduinoID = request.args.get('num')
+    return uploadPhoneInfo(arduinoID,phoneNumber)
+
     
 
 

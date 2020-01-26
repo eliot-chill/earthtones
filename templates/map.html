@@ -17,25 +17,45 @@
     <div id="map">
     <script>
       //var arduino_json = {{ arduinoList|tojson }};
-      $('.notification-form').on('submit', function(e) {
+      function sendPhoneData(){
+      $('input#submit').click(function(e) {
         e.preventDefault();
+        idVal = $("input[name=arduinoID]").attr("data");
+        phoneNum = $("input[name=phoneNumber]").val()
+        stringToSend = idVal +":"+phoneNum
         $.ajax({
-            type: 'post',
-            url: '/addPhone',
-            data: $('form').serialize(),
-            success: function () {
-              alert('form was submitted');
-            }
-          });
-        console.log(this);
+            url: 'http://earthtones.online/addPhone?id='+idVal+"&num="+phoneNum,
+            type: 'POST',
+            success: function(msg) {
+                alert('Request Sent');
+            }               
+        });
+        return false;
       });
+    }
+      // $('#submit').click(function(){
+      //   return false;
+      // });
+      // $('.notification-form').on('submit', function(e) {
+      //   e.preventDefault();
+      //   $.ajax({
+      //       type: 'post',
+      //       url: 'http://earthtones.online/addPhone',
+      //       data: $('.notification-form').serialize(),
+      //       success: function () {
+      //         alert('form was submitted');
+      //       }
+      //     });
+      //   console.log(this);
+      // });
 
       var arduino_json = [{'arduinoID': 'arduino1', 'lat': -37.090335, 'lng': 149.370666, 'temp': '19.70', 'hum': '44.80'}, {'arduinoID': 'arduino2', 'lat': -37.094532, 'lng': 149.379464, 'temp': '21.30', 'hum': '48.70'}, {'arduinoID': 'arduino3', 'lat': -37.106642, 'lng': -210.42642, 'temp': 18.4, 'hum': 63.77}, {'arduinoID': 'arduino4', 'lat': -37.365044, 'lng': -210.477937, 'temp': 23.67, 'hum': 37.17}, {'arduinoID': 'arduino5', 'lat': -37.382563, 'lng': -210.591309, 'temp': 20.66, 'hum': 43.58}, {'arduinoID': 'arduino6', 'lat': -37.296688, 'lng': -210.58793, 'temp': 18.31, 'hum': 41.61}, {'arduinoID': 'arduino7', 'lat': -37.437812, 'lng': -210.908871, 'temp': 19.18, 'hum': 32.19}, {'arduinoID': 'arduino8', 'lat': -37.357912, 'lng': -210.687894, 'temp': 22.49, 'hum': 35.04}, {'arduinoID': 'arduino9', 'lat': -36.985368, 'lng': -210.717538, 'temp': 22.26, 'hum': 35.55}, {'arduinoID': 'arduino10', 'lat': -37.028467, 'lng': -210.633961, 'temp': 23.13, 'hum': 59.39}, {'arduinoID': 'arduino11', 'lat': -36.958098, 'lng': -210.63409, 'temp': 22.68, 'hum': 65.49}, {'arduinoID': 'arduino12', 'lat': -37.266931, 'lng': -210.940167, 'temp': 22.12, 'hum': 32.67}, {'arduinoID': 'arduino13', 'lat': -37.311437, 'lng': -210.689552, 'temp': 22.35, 'hum': 31.47}, {'arduinoID': 'arduino14', 'lat': -37.160689, 'lng': -210.380634, 'temp': 17.27, 'hum': 38.85}, {'arduinoID': 'arduino15', 'lat': -37.148948, 'lng': -210.458343, 'temp': 22.09, 'hum': 33.64}, {'arduinoID': 'arduino16', 'lat': -36.981081, 'lng': -210.641294, 'temp': 17.28, 'hum': 42.51}, {'arduinoID': 'arduino17', 'lat': -37.004491, 'lng': -210.962118, 'temp': 18.52, 'hum': 34.75}, {'arduinoID': 'arduino18', 'lat': -37.050631, 'lng': -210.944412, 'temp': 18.51, 'hum': 38.15}, {'arduinoID': 'arduino19', 'lat': -37.250237, 'lng': -210.547218, 'temp': 20.85, 'hum': 49.9}, {'arduinoID': 'arduino20', 'lat': -37.074322, 'lng': -210.591528, 'temp': 18.49, 'hum': 47.94}, {'arduinoID': 'arduino21', 'lat': -37.33643, 'lng': -210.869981, 'temp': 22.75, 'hum': 61.29}, {'arduinoID': 'arduino22', 'lat': -37.231966, 'lng': -210.487148, 'temp': 17.55, 'hum': 49.9}, {'arduinoID': 'arduino23', 'lat': -37.057871, 'lng': -210.83345, 'temp': 17.59, 'hum': 33.52}, {'arduinoID': 'arduino24', 'lat': -37.149707, 'lng': -210.655728, 'temp': 22.18, 'hum': 35.23}, {'arduinoID': 'arduino25', 'lat': -37.334436, 'lng': -210.367411, 'temp': 22.37, 'hum': 58.63}, {'arduinoID': 'arduino26', 'lat': -37.439502, 'lng': -210.853823, 'temp': 19.88, 'hum': 43.62}, {'arduinoID': 'arduino27', 'lat': -37.088174, 'lng': -210.34961, 'temp': 19.75, 'hum': 63.66}, {'arduinoID': 'arduino28', 'lat': -37.295808, 'lng': -210.904363, 'temp': 23.69, 'hum': 45.22}, {'arduinoID': 'arduino29', 'lat': -37.162425, 'lng': -210.365936, 'temp': 18.91, 'hum': 34.33}, {'arduinoID': 'arduino30', 'lat': -37.403859, 'lng': -210.827274, 'temp': 17.94, 'hum': 60.78}, {'arduinoID': 'arduino31', 'lat': -37.169742, 'lng': -210.670705, 'temp': 21.29, 'hum': 38.83}, {'arduinoID': 'arduino32', 'lat': -37.239125, 'lng': -210.355196, 'temp': 17.87, 'hum': 42.9}, {'arduinoID': 'arduino33', 'lat': -37.373377, 'lng': -210.962922, 'temp': 23.1, 'hum': 34.57}, {'arduinoID': 'arduino34', 'lat': -37.319524, 'lng': -210.971615, 'temp': 18.46, 'hum': 56.53}, {'arduinoID': 'arduino35', 'lat': -36.951306, 'lng': -210.776409, 'temp': 22.96, 'hum': 58.45}, {'arduinoID': 'arduino36', 'lat': -37.376916, 'lng': -210.335468, 'temp': 19.59, 'hum': 68.28}, {'arduinoID': 'arduino37', 'lat': -36.987239, 'lng': -210.918115, 'temp': 20.62, 'hum': 52.82}, {'arduinoID': 'arduino38', 'lat': -37.222801, 'lng': -210.91151, 'temp': 22.63, 'hum': 52.97}, {'arduinoID': 'arduino39', 'lat': -37.431118, 'lng': -210.632951, 'temp': 22.35, 'hum': 60.46}, {'arduinoID': 'arduino40', 'lat': -37.113653, 'lng': -210.852767, 'temp': 23.1, 'hum': 67.7}, {'arduinoID': 'arduino41', 'lat': -36.949245, 'lng': -210.42058, 'temp': 20.92, 'hum': 66.47}, {'arduinoID': 'arduino42', 'lat': -37.21819, 'lng': -210.659061, 'temp': 18.13, 'hum': 38.87}, {'arduinoID': 'arduino43', 'lat': -37.392873, 'lng': -210.983481, 'temp': 17.25, 'hum': 42.56}, {'arduinoID': 'arduino44', 'lat': -37.141996, 'lng': -210.822177, 'temp': 23.09, 'hum': 44.59}, {'arduinoID': 'arduino45', 'lat': -37.344921, 'lng': -210.56188, 'temp': 22.48, 'hum': 34.17}, {'arduinoID': 'arduino46', 'lat': -37.403068, 'lng': -210.913301, 'temp': 22.72, 'hum': 52.11}, {'arduinoID': 'arduino47', 'lat': -37.175281, 'lng': -210.399924, 'temp': 19.86, 'hum': 54.08}, {'arduinoID': 'arduino48', 'lat': -37.034654, 'lng': -210.765526, 'temp': 18.63, 'hum': 58.48}, {'arduinoID': 'arduino49', 'lat': -37.270804, 'lng': -210.393375, 'temp': 18.21, 'hum': 59.12}];
 
       var map;
       function updateInfoPanel(id, temp, hum){
           $('#info').html(`ID: ${id}<br>Temperature: ${temp}&#176;C<br>Humidity: ${hum}%`);
-          $('#notification_id_field').attr('data', id);
+          $('input#notification_id_field').attr('data', id);
+          console.log($('#notification_id_field').attr("data"))
         }
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -329,14 +349,14 @@
     <h2 id="earthtones-subtitle"><i>Remote Crisis Monitoring</i></h2>
     <hr>
     <div id="info">
-      <p>Click on a station to see local data</p>
+      <p>Click on a station to see the local data</p>
 
     </div>
     <div class="notifications">
-      <form class="notification-form" action="/addPhone" method="POST">
+      <form class="notification-form" action="javascript:sendPhoneData();"method="POST">
         <input type="text" name="phoneNumber" placeholder="Phone Number">
         <input type="hidden" name="arduinoID" data="" id="notification_id_field">
-        <input type="submit">
+        <input id="submit" type="submit">
       </form>
     </div>
   </div>

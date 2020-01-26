@@ -4,16 +4,13 @@ def parseUploadData(data):
     earthtonesDB = db.dbConn()
     sensorDataCollection = earthtonesDB.sensorData
     post = {
-	    "arduinoID":data['id'],
+		"arduinoID":data['id'],
 	    "temperature":data['temperature'],
 	    "humidity":data['humidity'],
 	    "timestamp":data['timestamp']
-	    }
-    currentRecord = sensorDataCollection.find_one({"arduinoID": data['id']})
-    if currentRecord is not None:
-        sensorDataCollection.update_one({'arduinoID':data['id']}, {"$set": post}, upsert=False)
-    else:
-        sensorDataCollection.insert_one(post)
+	}
+
+    sensorDataCollection.update_one({'arduinoID':data['id']}, {"$set": post}, upsert=True)
 
     return "Done"
 

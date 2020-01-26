@@ -12,11 +12,12 @@ def checkForCritialLevel():
             coords = coordsData.find_one({"arduinoID":sensor['arduinoID']})
             numbersData = conn.phoneNumberInfo
             numbers = numbersData.find_one({"arduinoID":sensor['arduinoID']})
-            for number in numbers['numbers']:
-                print("Sending text to "+number)
-                twilioSender.sendText("ALERT", str(coords['lat'])+","+str(coords['lng']),number)
-                print("Removing number")
-                dataProcessor.removePhoneNumber(number,sensor['arduinoID'])
+            if(numbers is not None):
+                for number in numbers['numbers']:
+                    print("Sending text to "+number)
+                    twilioSender.sendText("ALERT", str(coords['lat'])+","+str(coords['lng']),number)
+                    print("Removing number")
+                    dataProcessor.removePhoneNumber(number,sensor['arduinoID'])
     
 
 

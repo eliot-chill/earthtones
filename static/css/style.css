@@ -14,18 +14,17 @@
   text-align: center;
   margin: 0 20px 20px 20px;
 }
-
-
 #info {
   text-align: center;
   color:gainsboro;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 1.2em;
 }
-
+.notifications {
+  margin-top: 130%;
+}
 .notification-form {
-  width: 33vw;
-  position: absolute;
+  width: 100%;
   bottom: 20px;
   display: flex;
   justify-content: space-evenly;
@@ -45,30 +44,25 @@
   padding: 10px 30px;
   color: white;
 }
-
 #container {
   display: flex;
   height: 100%;
   width: 100%;
 }
-
 .left {
   /*flex: 0 0 65%;*/
   width: 66vw;
 }
-
 .right {
   /*flex: 1;*/
   width: 33vw;
   display: flex;
   flex-direction: column;
 }
-
 #info-panel {
   background-color: #474747;
   justify-content: right;
 }
-
 #map {
   height:inherit;
   width:inherit;
@@ -87,7 +81,6 @@
     margin: 0;
     padding: 0;
   }
-
   hr {
     width:100%;
     border: 0;

@@ -14,7 +14,8 @@ import random
 lat:-37.094035
 lng:149.370666
 '''
-def generateFakeData(upperBound):
+def generateFakeData(upperBound, fireList):
+    print(fireList)
     earthtonesDB = db.dbConn()
     activeArduinosCollection = earthtonesDB.activeArduinos
     sensorDataCollection = earthtonesDB.sensorData
@@ -26,8 +27,10 @@ def generateFakeData(upperBound):
 
         dataObj['arduinoID'] = "arduino"+str(i)
         arduinoObj['arduinoID'] = "arduino"+str(i)
-
-        dataObj['temperature'] = round(random.uniform(17,24), 2)
+        if(dataObj['arduinoID'] in fireList):
+            dataObj['temperature'] = round(random.uniform(80,100), 2)
+        else:
+            dataObj['temperature'] = round(random.uniform(17,24), 2)
         dataObj['humidity'] = round(random.uniform(30,70), 2)
         dataObj['timestamp'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S") 
 

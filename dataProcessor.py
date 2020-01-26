@@ -52,4 +52,4 @@ def removePhoneNumber(phoneNumber,arduinoID):
 	phoneNumberInfoCollection.update_one({'arduinoID':arduinoID},{"$set":arduinoData})
 
 if __name__ == "__main__":
-	removePhoneNumber("+447496333676","arduino0")
+	print(getArduinosForMarkers())
